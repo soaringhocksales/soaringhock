@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Contact | Soaring Hock Sales</title>
+    <meta name="description" content="Contact Soaring Hock Sales for questions about eBay listings, Whatnot live sales, and inventory." />
+
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav">
+            <a href="index.html" class="logo">Soaring Hock Sales</a>
+
+            <button class="menu-button" id="menuButton">Menu</button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="sales.html">Live Sales</a>
+                <a href="ebay.html">eBay Store</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <p class="eyebrow">Get In Touch</p>
+            <h1>Contact Soaring Hock Sales</h1>
+            <p>
+                Have a question about a listing, a Whatnot sale, shipping, or upcoming inventory?
+                Reach out and we’ll get back to you as soon as we can.
+            </p>
+        </section>
+
+        <section class="section contact-layout">
+            <div class="contact-card">
+                <p class="eyebrow">Best Way To Reach Us</p>
+                <h2>Email</h2>
+                <p>
+                    For questions about orders, listings, live sales, or inventory, send us an email.
+                </p>
+
+                <a class="button primary" href="mailto:YOUR_EMAIL_HERE?subject=Question%20for%20Soaring%20Hock%20Sales">
+                    Email Soaring Hock Sales
+                </a>
+
+                <p class="small-note">
+                    Replace <strong>YOUR_EMAIL_HERE</strong> in the code with the real business email.
+                </p>
+            </div>
+
+            <div class="contact-card">
+                <p class="eyebrow">Marketplaces</p>
+                <h2>Find Us Online</h2>
+
+                <div class="link-list">
+                    <a href="#" target="_blank" rel="noopener">
+                        eBay Store →
+                    </a>
+
+                    <a href="#" target="_blank" rel="noopener">
+                        Whatnot Profile →
+                    </a>
+                </div>
+
+                <p>
+                    Shop current listings on eBay or follow us on Whatnot to catch upcoming live sales.
+                </p>
+            </div>
+        </section>
+
+        <section class="section narrow">
+            <div class="section-heading">
+                <p class="eyebrow">Message Template</p>
+                <h2>Send a quick message</h2>
+                <p>
+                    This simple form opens your email app. Later, if we want a real web form,
+                    we can connect it to a form service or eventually an ASP.NET backend.
+                </p>
+            </div>
+
+            <form class="contact-form" action="mailto:YOUR_EMAIL_HERE" method="post" enctype="text/plain">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" />
+
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="your@email.com" />
+
+                <label for="topic">Topic</label>
+                <select id="topic" name="topic">
+                    <option value="eBay question">eBay question</option>
+                    <option value="Whatnot live sale">Whatnot live sale</option>
+                    <option value="Shipping question">Shipping question</option>
+                    <option value="Inventory question">Inventory question</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="7" placeholder="What can we help with?"></textarea>
+
+                <button class="button primary" type="submit">
+                    Open Email App
+                </button>
+            </form>
+        </section>
+
+        <section class="banner">
+            <h2>Follow before the next sale.</h2>
+            <p>
+                The best way to catch new inventory is to follow the store and check the live sale schedule.
+            </p>
+
+            <div class="button-row centered">
+                <a class="button primary" href="ebay.html">Shop eBay</a>
+                <a class="button secondary" href="sales.html">Live Sales</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> Soaring Hock Sales</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
