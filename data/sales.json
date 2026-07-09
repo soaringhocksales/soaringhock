@@ -1,28 +1,28 @@
 [
   {
-    "title": "First Whatnot Plush Sale",
-    "description": "Our first live Whatnot auction featuring medium to large plush finds and Squishmallows.",
-    "image": "data/test.png",
+    "title": "First Whatnot Sale",
+    "description": "We’ll add the real show title, date, time, and Whatnot link here.",
+    "image": "whatnotpics/thumb.png",
     "url": "https://www.whatnot.com/user/soaringhocksales",
-    "buttonText": "View on Whatnot",
+    "buttonText": "Show link coming soon",
     "month": "TBD",
     "day": "--"
   },
   {
     "title": "Weekend Inventory Drop",
-    "description": "Upcoming live sale with fresh inventory, collectibles, plush, and auction deals.",
+    "description": "Use this for another scheduled live sale once it is created.",
     "image": "whatnotpics/thumb.png",
     "url": "https://www.whatnot.com/user/soaringhocksales",
-    "buttonText": "Follow for Updates",
+    "buttonText": "Show link coming soon",
     "month": "TBD",
     "day": "--"
   },
   {
     "title": "Collectors & Plush Auction",
-    "description": "A future live auction for hand-picked items, plush characters, and fun finds.",
+    "description": "Upcoming Whatnot sale featuring plush, collectibles, and hand-picked finds.",
     "image": "whatnotpics/thumb.png",
     "url": "https://www.whatnot.com/user/soaringhocksales",
-    "buttonText": "See Whatnot Page",
+    "buttonText": "View on Whatnot",
     "month": "TBD",
     "day": "--"
   }

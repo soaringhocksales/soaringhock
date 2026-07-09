@@ -2,19 +2,22 @@ document.addEventListener("DOMContentLoaded", () => {
     setupYear();
     setupMobileMenu();
 
+    if (document.getElementById("homeCards")) {
+        console.log("Loading homepage cards...");
+        loadHomeCards();
+    }
+
     if (document.getElementById("salesCards")) {
+        console.log("Loading sales cards...");
         loadSalesCards("data/sales.json", "salesCards", 3);
     }
 
     if (document.getElementById("ebayCards")) {
+        console.log("Loading eBay cards...");
         loadItemCards("data/ebay.json", "ebayCards", {
             limit: 8,
             random: true
         });
-    }
-
-    if (document.getElementById("homeCards")) {
-        loadHomeCards();
     }
 });
 
@@ -65,6 +68,8 @@ async function loadItemCards(jsonFile, containerId, options = {}) {
 
     try {
         const items = await getJson(jsonFile);
+        console.log(`Loaded ${items.length} items from ${jsonFile}`);
+
         const selectedItems = pickItems(items, limit, random);
 
         container.innerHTML = "";
@@ -84,6 +89,8 @@ async function loadSalesCards(jsonFile, containerId, limit = 3) {
 
     try {
         const sales = await getJson(jsonFile);
+        console.log(`Loaded ${sales.length} sales from ${jsonFile}`);
+
         const selectedSales = sales.slice(0, limit);
 
         container.innerHTML = "";
@@ -104,6 +111,8 @@ async function loadHomeCards() {
     try {
         const sales = await getJson("data/sales.json");
         const ebayItems = await getJson("data/ebay.json");
+
+        console.log(`Loaded homepage data: ${sales.length} sales, ${ebayItems.length} eBay items`);
 
         const firstSale = sales[0];
         const randomEbayItems = pickItems(ebayItems, 2, true);

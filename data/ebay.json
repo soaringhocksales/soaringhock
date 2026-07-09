@@ -1,52 +1,52 @@
 [
   {
+    "title": "Listing Title Here",
+    "description": "Short description of the item, condition, or why it is interesting.",
+    "image": "ebaypics/thumb.jpg",
+    "url": "https://www.ebay.com/",
+    "buttonText": "View on eBay"
+  },
+  {
+    "title": "Listing Title Here",
+    "description": "Short description of another featured listing.",
+    "image": "ebaypics/thumb.jpg",
+    "url": "https://www.ebay.com/",
+    "buttonText": "View on eBay"
+  },
+  {
+    "title": "Listing Title Here",
+    "description": "Short description of another item or category.",
+    "image": "ebaypics/thumb.jpg",
+    "url": "https://www.ebay.com/",
+    "buttonText": "View on eBay"
+  },
+  {
     "title": "Featured eBay Listing",
     "description": "A highlighted item from our current eBay inventory.",
-    "image": "images/thumb.png",
+    "image": "ebaypics/thumb.jpg",
     "url": "https://www.ebay.com/",
     "buttonText": "View Listing"
   },
   {
     "title": "Fresh Collectible Find",
     "description": "A recently sourced item available through our eBay store.",
-    "image": "images/thumb.png",
+    "image": "ebaypics/thumb.jpg",
     "url": "https://www.ebay.com/",
     "buttonText": "View Listing"
   },
   {
     "title": "Plush & Character Goods",
     "description": "Soft collectibles, plush finds, and character items from our current inventory.",
-    "image": "images/thumb.png",
+    "image": "ebaypics/thumb.jpg",
     "url": "https://www.ebay.com/",
     "buttonText": "Shop Item"
   },
   {
     "title": "Auction Highlight",
     "description": "One of our current online auction listings.",
-    "image": "images/thumb.png",
+    "image": "ebaypics/thumb.jpg",
     "url": "https://www.ebay.com/",
     "buttonText": "View Auction"
-  },
-  {
-    "title": "New Inventory Pick",
-    "description": "A fresh listing picked from our newest batch of inventory.",
-    "image": "images/thumb.png",
-    "url": "https://www.ebay.com/",
-    "buttonText": "View Listing"
-  },
-  {
-    "title": "Great Deal Find",
-    "description": "A value pick from the Soaring Hock Sales eBay store.",
-    "image": "ebaypics/thumb.jpg",
-    "url": "https://www.ebay.com/",
-    "buttonText": "Shop Now"
-  },
-  {
-    "title": "Collectibles Listing",
-    "description": "A collectible item currently available online.",
-    "image": "ebaypics/thumb.jpg",
-    "url": "https://www.ebay.com/",
-    "buttonText": "View Listing"
   },
   {
     "title": "Store Favorite",
