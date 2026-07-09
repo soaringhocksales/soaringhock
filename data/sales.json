@@ -9,20 +9,20 @@
     "day": "--"
   },
   {
+    "title": "Collectors & Plush Auction",
+    "description": "Upcoming Whatnot sale Friday 7PM PT.",
+    "image": "whatnotpics/thumb1.png",
+    "url": "https://www.whatnot.com/user/soaringhocksales",
+    "buttonText": "View on Whatnot",
+    "month": "TBD",
+    "day": "--"
+  },
+  {
     "title": "Weekend Inventory Drop",
     "description": "Use this for another scheduled live sale once it is created.",
     "image": "whatnotpics/thumb.png",
     "url": "https://www.whatnot.com/user/soaringhocksales",
     "buttonText": "Show link coming soon",
-    "month": "TBD",
-    "day": "--"
-  },
-  {
-    "title": "Collectors & Plush Auction",
-    "description": "Upcoming Whatnot sale featuring plush, collectibles, and hand-picked finds.",
-    "image": "whatnotpics/thumb.png",
-    "url": "https://www.whatnot.com/user/soaringhocksales",
-    "buttonText": "View on Whatnot",
     "month": "TBD",
     "day": "--"
   }
