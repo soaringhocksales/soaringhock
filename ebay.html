@@ -1,88 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DSQBXJHCF6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  <title>eBay Store | Soaring Hock Sales</title>
-  <meta name="description" content="Shop current eBay listings from Soaring Hock Sales." />
+        gtag('config', 'G-DSQBXJHCF6');
+    </script>
 
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>eBay Store | Soaring Hock Sales</title>
+    <meta name="description" content="Featured eBay listings and online inventory from Soaring Hock Sales." />
+
+    <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-  <header class="site-header">
-    <nav class="nav">
-      <a href="index.html" class="logo">Soaring Hock Sales</a>
+    <header class="site-header">
+        <nav class="nav">
+            <a href="index.html" class="logo">Soaring Hock Sales</a>
 
-      <button class="menu-button" id="menuButton">Menu</button>
+            <button class="menu-button" id="menuButton">Menu</button>
 
-      <div class="nav-links" id="navLinks">
-          <a href="index.html">Home</a>
-          <a href="sales.html">Live Sales</a>
-          <a href="ebay.html">eBay Store</a>
-          <a href="contact.html">Contact</a>
-          <a href="about.html">About</a>
-      </div>
-    </nav>
-  </header>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="sales.html">Live Sales</a>
+                <a href="ebay.html">eBay Store</a>
+                <a href="contact.html">Contact</a>
+                <a href="about.html">About</a>
+            </div>
+        </nav>
+    </header>
 
-  <main>
-    <section class="page-hero">
-      <p class="eyebrow">Shop Online</p>
-      <h1>eBay Store</h1>
-      <p>
-        Browse our latest listings, auctions, and buy-it-now items on eBay.
-      </p>
+    <main>
+        <section class="page-hero">
+            <p class="eyebrow">eBay Store</p>
+            <h1>Featured eBay Listings</h1>
+            <p>
+                A rotating selection of current listings, collectibles, deals, and hand-picked finds.
+            </p>
+        </section>
 
-      <a class="button primary" href="https://www.ebay.com/str/soaringhocksales" target="_blank">
-        Open eBay Store
-      </a>
-    </section>
+        <section class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Listings</p>
+                <h2>Current eBay Highlights</h2>
+                <p>
+                    These cards are loaded from our eBay data file, so updating the page is as easy as editing the JSON.
+                </p>
+            </div>
 
-    <section class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Highlights</p>
-        <h2>Featured Listings</h2>
-        <p>
-          Replace these cards with real items and direct eBay links.
-        </p>
-      </div>
+            <div class="card-grid" id="ebayCards">
+                <!-- eBay cards load from data/ebay.json -->
+            </div>
+        </section>
 
-      <div class="card-grid">
-        <article class="item-card">
-          <div class="placeholder-image">Photo</div>
-          <h3>Listing Title Here</h3>
-          <p>
-            Short description of the item, condition, or why it is interesting.
-          </p>
-          <a href="#" target="_blank">View on eBay →</a>
-        </article>
+        <section class="banner">
+            <h2>Check back for fresh finds.</h2>
+            <p>
+                We update inventory as new items are listed and new deals come through.
+            </p>
 
-        <article class="item-card">
-          <div class="placeholder-image">Photo</div>
-          <h3>Listing Title Here</h3>
-          <p>
-            Short description of another featured listing.
-          </p>
-          <a href="#" target="_blank">View on eBay →</a>
-        </article>
+            <a class="button primary" href="https://www.ebay.com/" target="_blank" rel="noopener noreferrer">
+                Visit eBay Store
+            </a>
+        </section>
+    </main>
 
-        <article class="item-card">
-          <div class="placeholder-image">Photo</div>
-          <h3>Listing Title Here</h3>
-          <p>
-            Short description of another item or category.
-          </p>
-          <a href="#" target="_blank">View on eBay →</a>
-        </article>
-      </div>
-    </section>
-  </main>
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> Soaring Hock Sales</p>
+    </footer>
 
-  <footer class="footer">
-    <p>&copy; <span id="year"></span> Soaring Hock Sales</p>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

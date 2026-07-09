@@ -10,6 +10,7 @@
 
         gtag('config', 'G-DSQBXJHCF6');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -18,109 +19,83 @@
 
     <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-  <header class="site-header">
-    <nav class="nav">
-      <a href="index.html" class="logo">Soaring Hock Sales</a>
+    <header class="site-header">
+        <nav class="nav">
+            <a href="index.html" class="logo">Soaring Hock Sales</a>
 
-      <button class="menu-button" id="menuButton">Menu</button>
+            <button class="menu-button" id="menuButton">Menu</button>
 
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="sales.html">Live Sales</a>
-        <a href="ebay.html">eBay Store</a>
-        <a href="contact.html">Contact</a>
-        <a href="about.html">About</a>
-      </div>
-    </nav>
-  </header>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="sales.html">Live Sales</a>
+                <a href="ebay.html">eBay Store</a>
+                <a href="contact.html">Contact</a>
+                <a href="about.html">About</a>
+            </div>
+        </nav>
+    </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow">eBay • Whatnot • Collectibles • Deals</p>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">eBay • Whatnot • Collectibles • Deals</p>
 
-        <h1>Online treasure hunting, live sales, and hand-picked finds.</h1>
+                <h1>Online treasure hunting, live sales, and hand-picked finds.</h1>
 
-        <p class="hero-text">
-          Soaring Hock Sales is your landing spot for our latest eBay listings,
-          upcoming Whatnot live sales, and featured inventory.
-        </p>
+                <p class="hero-text">
+                    Soaring Hock Sales is your landing spot for our latest eBay listings,
+                    upcoming Whatnot live sales, and featured inventory.
+                </p>
 
-        <div class="button-row">
-          <a class="button primary" href="ebay.html">Shop eBay</a>
-          <a class="button secondary" href="sales.html">Upcoming Sales</a>
-        </div>
-      </div>
+                <div class="button-row">
+                    <a class="button primary" href="ebay.html">Shop eBay</a>
+                    <a class="button secondary" href="sales.html">Upcoming Sales</a>
+                </div>
+            </div>
 
-      <div class="hero-card">
-        <h2>Next Live Sale</h2>
-        <p class="card-date">Coming soon</p>
-        <p>
-          We’ll post our next Whatnot show here once it is scheduled.
-        </p>
-        <a href="sales.html">View schedule →</a>
-      </div>
-    </section>
+            <div class="hero-card">
+                <h2>Next Live Sale</h2>
+                <p class="card-date">Coming soon</p>
+                <p>
+                    We’ll post our next Whatnot show here once it is scheduled.
+                </p>
+                <a href="sales.html">View schedule →</a>
+            </div>
+        </section>
 
-    <section class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Featured</p>
-        <h2>Current Highlights</h2>
-        <p>
-          A few items or categories we want people to notice first.
-        </p>
-      </div>
+        <section class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Featured</p>
+                <h2>Current Highlights</h2>
+                <p>
+                    A rotating preview of our next Whatnot sale and featured eBay listings.
+                </p>
+            </div>
 
-      <div class="card-grid">
-          <article class="item-card">
-              <img src="ebaypics/thumb.jpg" alt="Ebay Item" class="card-thumbnail">
+            <div class="card-grid" id="homeCards">
+                <!-- Homepage cards load from data/sales.json and data/ebay.json -->
+            </div>
+        </section>
 
-              <h3>Featured eBay Listing</h3>
-              <p>
-                  Add one of your strongest current listings here.
-              </p>
-              <a href="ebay.html">View listings →</a>
-          </article>
-
-        <article class="item-card">
-            <img src="whatnotpics/thumb.png" alt="Upcoming Whatnot auction preview" class="card-thumbnail">
-
-            <h3>Whatnot Auctions</h3>
+        <section class="banner">
+            <h2>Follow us before the next drop.</h2>
             <p>
-                Check the schedule for upcoming live video sales.
+                Shop anytime on eBay, or catch us live on Whatnot for auctions and deals.
             </p>
-            <a href="sales.html">See shows →</a>
-        </article>
 
-        <article class="item-card">
-          <div class="placeholder-image">New Finds</div>
-          <h3>Fresh Inventory</h3>
-          <p>
-            New items are added regularly as we source more inventory.
-          </p>
-          <a href="about.html">About us →</a>
-        </article>
-      </div>
-    </section>
+            <div class="button-row centered">
+                <a class="button primary" href="ebay.html">eBay Store</a>
+                <a class="button secondary" href="sales.html">Whatnot Schedule</a>
+            </div>
+        </section>
+    </main>
 
-    <section class="banner">
-      <h2>Follow us before the next drop.</h2>
-      <p>
-        Shop anytime on eBay, or catch us live on Whatnot for auctions and deals.
-      </p>
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> Soaring Hock Sales</p>
+    </footer>
 
-      <div class="button-row centered">
-        <a class="button primary" href="ebay.html">eBay Store</a>
-        <a class="button secondary" href="sales.html">Whatnot Schedule</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>&copy; <span id="year"></span> Soaring Hock Sales</p>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

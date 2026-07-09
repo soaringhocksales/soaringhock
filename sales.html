@@ -1,88 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DSQBXJHCF6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  <title>Live Sales | Soaring Hock Sales</title>
-  <meta name="description" content="Upcoming Whatnot live sales from Soaring Hock Sales." />
+        gtag('config', 'G-DSQBXJHCF6');
+    </script>
 
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Live Sales | Soaring Hock Sales</title>
+    <meta name="description" content="Upcoming Whatnot live sales from Soaring Hock Sales." />
+
+    <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-  <header class="site-header">
-    <nav class="nav">
-      <a href="index.html" class="logo">Soaring Hock Sales</a>
+    <header class="site-header">
+        <nav class="nav">
+            <a href="index.html" class="logo">Soaring Hock Sales</a>
 
-      <button class="menu-button" id="menuButton">Menu</button>
+            <button class="menu-button" id="menuButton">Menu</button>
 
-      <div class="nav-links" id="navLinks">
-          <a href="index.html">Home</a>
-          <a href="sales.html">Live Sales</a>
-          <a href="ebay.html">eBay Store</a>
-          <a href="contact.html">Contact</a>
-          <a href="about.html">About</a>
-      </div>
-    </nav>
-  </header>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="sales.html">Live Sales</a>
+                <a href="ebay.html">eBay Store</a>
+                <a href="contact.html">Contact</a>
+                <a href="about.html">About</a>
+            </div>
+        </nav>
+    </header>
 
-  <main>
-    <section class="page-hero">
-      <p class="eyebrow">Whatnot Shows</p>
-      <h1>Upcoming Live Sales</h1>
-      <p>
-        Here’s where we’ll post scheduled Whatnot sales, live auctions,
-        special drops, and show links.
-      </p>
-    </section>
-
-    <section class="section narrow">
-      <div class="sale-list">
-        <article class="sale-card">
-          <div class="sale-date">
-            <span class="month">TBD</span>
-            <span class="day">--</span>
-          </div>
-
-          <div class="sale-info">
-            <h2>First Whatnot Sale</h2>
+    <main>
+        <section class="page-hero">
+            <p class="eyebrow">Whatnot Shows</p>
+            <h1>Upcoming Live Sales</h1>
             <p>
-              We’ll add the real show title, date, time, and Whatnot link here.
+                Here’s where we’ll post scheduled Whatnot sales, live auctions,
+                special drops, and show links.
             </p>
-            <a class="button secondary" href="#" target="_blank">Show link coming soon</a>
-          </div>
-        </article>
+        </section>
 
-        <article class="sale-card">
-          <div class="sale-date">
-            <span class="month">TBD</span>
-            <span class="day">--</span>
-          </div>
+        <section class="section narrow">
+            <div class="sale-list" id="salesCards">
+                <!-- Whatnot sale cards load from data/sales.json -->
+            </div>
+        </section>
 
-          <div class="sale-info">
-            <h2>Weekend Inventory Drop</h2>
+        <section class="banner">
+            <h2>Want reminders?</h2>
             <p>
-              Use this for another scheduled live sale once it is created.
+                Follow our Whatnot page so you can get notified when we go live.
             </p>
-            <a class="button secondary" href="#" target="_blank">Show link coming soon</a>
-          </div>
-        </article>
-      </div>
-    </section>
 
-    <section class="banner">
-      <h2>Want reminders?</h2>
-      <p>
-        Follow our Whatnot page so you can get notified when we go live.
-      </p>
-      <a class="button primary" href="https://www.whatnot.com/user/soaringhocksales" target="_blank">Follow on Whatnot</a>
-    </section>
-  </main>
+            <a class="button primary" href="https://www.whatnot.com/user/soaringhocksales" target="_blank" rel="noopener noreferrer">
+                Follow on Whatnot
+            </a>
+        </section>
+    </main>
 
-  <footer class="footer">
-    <p>&copy; <span id="year"></span> Soaring Hock Sales</p>
-  </footer>
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> Soaring Hock Sales</p>
+    </footer>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
