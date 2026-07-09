@@ -298,21 +298,13 @@ h3 {
     gap: 1rem;
 }
 
-/*.sale-card {
-    display: grid;
-    grid-template-columns: 110px 180px minmax(0, 1fr);
-    gap: 1.25rem;
-    align-items: center;
-    padding: 1.25rem;
-}*/
 .sale-card {
     display: grid;
-    grid-template-columns: 110px minmax(0, 1fr);
+    grid-template-columns: 100px 180px minmax(0, 1fr);
     gap: 1.25rem;
     align-items: center;
     padding: 1.25rem;
 }
-
 
 .sale-date {
     background: var(--panel-light);
@@ -344,6 +336,22 @@ h3 {
     border-radius: 16px;
     background: var(--panel-light);
 }
+
+.sale-info {
+    min-width: 0;
+}
+
+    .sale-info h2 {
+        font-size: clamp(1.7rem, 3vw, 2.4rem);
+        line-height: 1.05;
+        letter-spacing: -0.045em;
+        margin-bottom: 0.75rem;
+    }
+
+    .sale-info p {
+        max-width: 620px;
+        margin-bottom: 1rem;
+    }
 
 /* Banner */
 
@@ -497,5 +505,13 @@ h3 {
     .sale-thumbnail {
         width: 100%;
         height: 210px;
+    }
+
+    .sale-date {
+        width: fit-content;
+    }
+
+    .sale-info h2 {
+        font-size: 2rem;
     }
 }
