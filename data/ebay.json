@@ -9,21 +9,21 @@
   {
     "title": "Listing Title Here",
     "description": "Short description of another featured listing.",
-    "image": "ebaypics/thumb.jpg",
+    "image": "ebaypics/thumb1.jpg",
     "url": "https://www.ebay.com/",
     "buttonText": "View on eBay"
   },
   {
     "title": "Listing Title Here",
     "description": "Short description of another item or category.",
-    "image": "ebaypics/thumb.jpg",
+    "image": "ebaypics/thumb2.jpg",
     "url": "https://www.ebay.com/",
     "buttonText": "View on eBay"
   },
   {
     "title": "Featured eBay Listing",
     "description": "A highlighted item from our current eBay inventory.",
-    "image": "ebaypics/thumb.jpg",
+    "image": "ebaypics/thumb3.jpg",
     "url": "https://www.ebay.com/",
     "buttonText": "View Listing"
   },
