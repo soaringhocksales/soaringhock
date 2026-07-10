@@ -201,7 +201,7 @@ function renderEbayCards(items, category) {
     if (category !== "All") {
         selectedItems = items.filter(item => item.category === category);
     } else {
-        selectedItems = pickItems(items, 8, true);
+        selectedItems = pickItems(items, 9, true);
     }
 
     container.innerHTML = "";
