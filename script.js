@@ -14,12 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (document.getElementById("ebayCards")) {
         console.log("Loading eBay cards...");
-        loadItemCards("data/ebay.json", "ebayCards", {
-            limit: 8,
-            random: true
-        });
+        loadEbayPage("data/ebay.json");
     }
 });
+
+let allEbayItems = [];
 
 function setupMobileMenu() {
     const menuButton = document.querySelector("#menuButton");
@@ -140,21 +139,95 @@ async function loadHomeCards() {
     }
 }
 
+async function loadEbayPage(jsonFile) {
+    const container = document.getElementById("ebayCards");
+    const filterContainer = document.getElementById("categoryFilter");
+
+    if (!container) return;
+
+    try {
+        allEbayItems = await getJson(jsonFile);
+        console.log(`Loaded ${allEbayItems.length} eBay items from ${jsonFile}`);
+
+        renderCategoryButtons(allEbayItems, filterContainer);
+        renderEbayCards(allEbayItems, "All");
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = `<p class="load-error">Could not load listings right now.</p>`;
+    }
+}
+
+function renderCategoryButtons(items, filterContainer) {
+    if (!filterContainer) return;
+
+    const categories = [
+        "All",
+        ...new Set(items.map(item => item.category).filter(Boolean))
+    ];
+
+    filterContainer.innerHTML = "";
+
+    categories.forEach(category => {
+        const button = document.createElement("button");
+        button.className = "category-button";
+        button.textContent = category;
+        button.dataset.category = category;
+
+        if (category === "All") {
+            button.classList.add("active");
+        }
+
+        button.addEventListener("click", () => {
+            document.querySelectorAll(".category-button").forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            button.classList.add("active");
+            renderEbayCards(allEbayItems, category);
+        });
+
+        filterContainer.appendChild(button);
+    });
+}
+
+function renderEbayCards(items, category) {
+    const container = document.getElementById("ebayCards");
+    if (!container) return;
+
+    let selectedItems = items;
+
+    if (category !== "All") {
+        selectedItems = items.filter(item => item.category === category);
+    } else {
+        selectedItems = pickItems(items, 8, true);
+    }
+
+    container.innerHTML = "";
+
+    selectedItems.forEach(item => {
+        container.appendChild(createItemCard(item));
+    });
+
+    if (selectedItems.length === 0) {
+        container.innerHTML = `<p class="load-error">No listings found in this category yet.</p>`;
+    }
+}
+
 function createItemCard(item) {
     const card = document.createElement("article");
     card.className = "item-card";
 
     card.innerHTML = `
-    <img src="${item.image}" alt="${item.title}" class="card-thumbnail">
+        <img src="${item.image}" alt="${item.title}" class="card-thumbnail">
 
-    <h3>${item.title}</h3>
+        <h3>${item.title}</h3>
 
-    <p>${item.description}</p>
+        <p>${item.description}</p>
 
-    <a href="${item.url}" target="_blank" rel="noopener noreferrer">
-      ${item.buttonText || "View Item"} →
-    </a>
-  `;
+        <a href="${item.url}" target="_blank" rel="noopener noreferrer">
+            ${item.buttonText || "View Item"} →
+        </a>
+    `;
 
     return card;
 }
@@ -164,23 +237,23 @@ function createSaleCard(sale) {
     card.className = "sale-card";
 
     card.innerHTML = `
-    <div class="sale-date">
-      <span class="month">${sale.month || "TBD"}</span>
-      <span class="day">${sale.day || "--"}</span>
-    </div>
+        <div class="sale-date">
+            <span class="month">${sale.month || "TBD"}</span>
+            <span class="day">${sale.day || "--"}</span>
+        </div>
 
-    <img src="${sale.image}" alt="${sale.title}" class="sale-thumbnail">
+        <img src="${sale.image}" alt="${sale.title}" class="sale-thumbnail">
 
-    <div class="sale-info">
-      <h2>${sale.title}</h2>
+        <div class="sale-info">
+            <h2>${sale.title}</h2>
 
-      <p>${sale.description}</p>
+            <p>${sale.description}</p>
 
-      <a class="button secondary" href="${sale.url}" target="_blank" rel="noopener noreferrer">
-        ${sale.buttonText || "View Sale"}
-      </a>
-    </div>
-  `;
+            <a class="button secondary" href="${sale.url}" target="_blank" rel="noopener noreferrer">
+                ${sale.buttonText || "View Sale"}
+            </a>
+        </div>
+    `;
 
     return card;
 }
