@@ -1,3 +1,5 @@
+const DATA_VERSION = Date.now();
+
 document.addEventListener("DOMContentLoaded", () => {
     setupYear();
     setupMobileMenu();
@@ -9,12 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (document.getElementById("salesCards")) {
         console.log("Loading sales cards...");
-        loadSalesCards("data/sales.json", "salesCards", 3);
+        loadSalesCards(`data/sales.json?v=${DATA_VERSION}`, "salesCards", 3);
     }
 
     if (document.getElementById("ebayCards")) {
         console.log("Loading eBay cards...");
-        loadEbayPage("data/ebay.json");
+        loadEbayPage(`data/ebay.json?v=${DATA_VERSION}`);
     }
 });
 
@@ -108,8 +110,8 @@ async function loadHomeCards() {
     if (!container) return;
 
     try {
-        const sales = await getJson("data/sales.json");
-        const ebayItems = await getJson("data/ebay.json");
+        const sales = await getJson(`data/sales.json?v=${DATA_VERSION}`);
+        const ebayItems = await getJson(`data/ebay.json?v=${DATA_VERSION}`);
 
         console.log(`Loaded homepage data: ${sales.length} sales, ${ebayItems.length} eBay items`);
 
