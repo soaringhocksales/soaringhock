@@ -184,7 +184,7 @@ h3 {
     display: flex;
     flex-wrap: wrap;
     gap: 0.85rem;
-    margin-top: 1.5rem;
+    margin-top: 2 rem;
 }
 
     .button-row.centered {
