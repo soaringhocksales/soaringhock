@@ -1,4 +1,4 @@
-const DATA_VERSION = "1.0.0";
+const DATA_VERSION = Date.now();
 
 document.addEventListener("DOMContentLoaded", () => {
     setupYear();
@@ -18,9 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Loading eBay cards...");
         loadEbayPage(`data/ebay.json?v=${DATA_VERSION}`);
     }
+
+    if (document.getElementById("consignmentCards")) {
+        console.log("Loading consignment cards...");
+        loadConsignmentPage(`data/consignments.json?v=${DATA_VERSION}`);
+    }
 });
 
 let allEbayItems = [];
+let allConsignmentItems = [];
 
 function setupMobileMenu() {
     const menuButton = document.querySelector("#menuButton");
@@ -151,7 +157,7 @@ async function loadEbayPage(jsonFile) {
         allEbayItems = await getJson(jsonFile);
         console.log(`Loaded ${allEbayItems.length} eBay items from ${jsonFile}`);
 
-        renderCategoryButtons(allEbayItems, filterContainer);
+        renderCategoryButtons(allEbayItems, filterContainer, "ebay");
         renderEbayCards(allEbayItems, "All");
     } catch (error) {
         console.error(error);
@@ -159,7 +165,25 @@ async function loadEbayPage(jsonFile) {
     }
 }
 
-function renderCategoryButtons(items, filterContainer) {
+async function loadConsignmentPage(jsonFile) {
+    const container = document.getElementById("consignmentCards");
+    const filterContainer = document.getElementById("consignmentCategoryFilter");
+
+    if (!container) return;
+
+    try {
+        allConsignmentItems = await getJson(jsonFile);
+        console.log(`Loaded ${allConsignmentItems.length} consignment items from ${jsonFile}`);
+
+        renderCategoryButtons(allConsignmentItems, filterContainer, "consignment");
+        renderConsignmentCards(allConsignmentItems, "All");
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = `<p class="load-error">Could not load consignment items right now.</p>`;
+    }
+}
+
+function renderCategoryButtons(items, filterContainer, pageType) {
     if (!filterContainer) return;
 
     const categories = [
@@ -180,12 +204,19 @@ function renderCategoryButtons(items, filterContainer) {
         }
 
         button.addEventListener("click", () => {
-            document.querySelectorAll(".category-button").forEach(btn => {
+            filterContainer.querySelectorAll(".category-button").forEach(btn => {
                 btn.classList.remove("active");
             });
 
             button.classList.add("active");
-            renderEbayCards(allEbayItems, category);
+
+            if (pageType === "ebay") {
+                renderEbayCards(allEbayItems, category);
+            }
+
+            if (pageType === "consignment") {
+                renderConsignmentCards(allConsignmentItems, category);
+            }
         });
 
         filterContainer.appendChild(button);
@@ -215,6 +246,27 @@ function renderEbayCards(items, category) {
     }
 }
 
+function renderConsignmentCards(items, category) {
+    const container = document.getElementById("consignmentCards");
+    if (!container) return;
+
+    let selectedItems = items;
+
+    if (category !== "All") {
+        selectedItems = items.filter(item => item.category === category);
+    }
+
+    container.innerHTML = "";
+
+    selectedItems.forEach(item => {
+        container.appendChild(createConsignmentCard(item));
+    });
+
+    if (selectedItems.length === 0) {
+        container.innerHTML = `<p class="load-error">No consignment items found in this category yet.</p>`;
+    }
+}
+
 function createItemCard(item) {
     const card = document.createElement("article");
     card.className = "item-card";
@@ -228,6 +280,37 @@ function createItemCard(item) {
 
         <a href="${item.url}" target="_blank" rel="noopener noreferrer">
             ${item.buttonText || "View Item"} →
+        </a>
+    `;
+
+    return card;
+}
+
+function createConsignmentCard(item) {
+    const card = document.createElement("article");
+    card.className = "item-card consignment-card";
+
+    const isSold = item.status && item.status.toLowerCase() === "sold";
+    const buttonClass = isSold ? "consignment-button sold" : "consignment-button";
+    const buttonText = isSold ? "Sold" : (item.buttonText || "Buy Now");
+    const buttonUrl = isSold ? "#" : item.url;
+
+    card.innerHTML = `
+        <img src="${item.image}" alt="${item.title}" class="card-thumbnail">
+
+        <div class="item-meta-row">
+            <span class="item-price">${item.price || ""}</span>
+            <span class="item-status">${item.status || "Available"}</span>
+        </div>
+
+        <h3>${item.title}</h3>
+
+        <p>${item.description}</p>
+
+        <p class="item-id">${item.id || ""}</p>
+
+        <a class="${buttonClass}" href="${buttonUrl}" target="_blank" rel="noopener noreferrer">
+            ${buttonText} →
         </a>
     `;
 
