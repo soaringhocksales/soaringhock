@@ -4,6 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     setupYear();
     setupMobileMenu();
 
+    if (document.getElementById("nextSaleCard")) {
+        console.log("Loading next sale hero card...");
+        loadNextSaleCard();
+    }
+
     if (document.getElementById("homeCards")) {
         console.log("Loading homepage cards...");
         loadHomeCards();
@@ -176,6 +181,52 @@ async function loadHomeCards() {
     } catch (error) {
         console.error(error);
         container.innerHTML = `<p class="load-error">Could not load featured items right now.</p>`;
+    }
+}
+
+async function loadNextSaleCard() {
+    const card = document.getElementById("nextSaleCard");
+    if (!card) return;
+
+    try {
+        const sales = await getJson(`data/sales.json?v=${DATA_VERSION}`);
+        const nextSale = sales[0];
+
+        if (!nextSale) {
+            card.innerHTML = `
+                <h2>Next Live Sale</h2>
+                <p class="card-date">Coming soon</p>
+                <p>
+                    We’ll post our next Whatnot show here once it is scheduled.
+                </p>
+                <a href="sales.html">View schedule →</a>
+            `;
+            return;
+        }
+
+        const saleDate = `${nextSale.month || "TBD"} ${nextSale.day || ""}`.trim();
+
+        card.innerHTML = `
+            <h2>${nextSale.title || "Next Live Sale"}</h2>
+            <p class="card-date">${saleDate || "Coming soon"}</p>
+            <p>
+                ${nextSale.description || "Check out our next scheduled Whatnot live sale."}
+            </p>
+            <a href="${nextSale.url || "sales.html"}" target="_blank" rel="noopener noreferrer">
+                ${nextSale.buttonText || "View schedule"} →
+            </a>
+        `;
+    } catch (error) {
+        console.error(error);
+
+        card.innerHTML = `
+            <h2>Next Live Sale</h2>
+            <p class="card-date">Coming soon</p>
+            <p>
+                We’ll post our next Whatnot show here once it is scheduled.
+            </p>
+            <a href="sales.html">View schedule →</a>
+        `;
     }
 }
 
