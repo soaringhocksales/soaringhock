@@ -1,9 +1,9 @@
 [
   {
     "title": "Second Whatnot Sale",
-    "description": "We’ll add the real show title, date, time, and Whatnot link here.",
+    "description": "Auctioning more Squishmallows and Plushies",
     "image": "whatnotpics/thumb.png",
-    "url": "https://www.whatnot.com/",
+    "url": "https://www.whatnot.com/dashboard/live/198a89a7-ceb0-49cf-8a18-e7ea0bd62e7b",
     "buttonText": "Link for Friday's sale",
     "month": "SUN 12th",
     "day": "6pm"
@@ -14,8 +14,8 @@
     "image": "whatnotpics/thumb1.png",
     "url": "https://www.whatnot.com/user/soaringhocksales",
     "buttonText": "View on Whatnot",
-    "month": "TBD",
-    "day": "--:pm"
+    "month": "SUN 12th",
+    "day": "6pm"
   },
   {
     "title": "Weekend Inventory Drop",
@@ -23,7 +23,7 @@
     "image": "whatnotpics/thumb.png",
     "url": "https://www.whatnot.com/user/soaringhocksales",
     "buttonText": "Show link coming soon",
-    "month": "TBD",
-    "day": "--:pm"
+    "month": "SUN 12th",
+    "day": "6pm"
   }
 ]
