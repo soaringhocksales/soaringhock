@@ -119,10 +119,26 @@ async function loadHomeCards() {
         const sales = await getJson(`data/sales.json?v=${DATA_VERSION}`);
         const ebayItems = await getJson(`data/ebay.json?v=${DATA_VERSION}`);
 
-        console.log(`Loaded homepage data: ${sales.length} sales, ${ebayItems.length} eBay items`);
+        let consignmentItems = [];
+
+        try {
+            consignmentItems = await getJson(`data/consignments.json?v=${DATA_VERSION}`);
+        } catch (error) {
+            console.warn("No consignments file found or could not load consignments.json");
+        }
+
+        console.log(
+            `Loaded homepage data: ${sales.length} sales, ${ebayItems.length} eBay items, ${consignmentItems.length} consignment items`
+        );
 
         const firstSale = sales[0];
         const randomEbayItems = pickItems(ebayItems, 2, true);
+
+        const availableConsignments = consignmentItems.filter(item => {
+            return !item.status || item.status.toLowerCase() !== "sold";
+        });
+
+        const randomConsignment = pickItems(availableConsignments, 1, true)[0];
 
         container.innerHTML = "";
 
@@ -138,9 +154,19 @@ async function loadHomeCards() {
             );
         }
 
-        randomEbayItems.forEach(item => {
-            container.appendChild(createItemCard(item));
-        });
+        if (randomConsignment) {
+            const randomEbayItem = pickItems(ebayItems, 1, true)[0];
+
+            if (randomEbayItem) {
+                container.appendChild(createItemCard(randomEbayItem));
+            }
+
+            container.appendChild(createConsignmentCard(randomConsignment));
+        } else {
+            randomEbayItems.forEach(item => {
+                container.appendChild(createItemCard(item));
+            });
+        }
     } catch (error) {
         console.error(error);
         container.innerHTML = `<p class="load-error">Could not load featured items right now.</p>`;
