@@ -65,6 +65,9 @@ function pickItems(items, limit, random = false) {
     const source = random ? shuffleArray(items) : items;
     return source.slice(0, limit);
 }
+function isActiveItem(item) {
+    return item.id && !item.id.startsWith("!");
+}
 
 async function loadItemCards(jsonFile, containerId, options = {}) {
     const container = document.getElementById(containerId);
@@ -135,7 +138,10 @@ async function loadHomeCards() {
         const randomEbayItems = pickItems(ebayItems, 2, true);
 
         const availableConsignments = consignmentItems.filter(item => {
-            return !item.status || item.status.toLowerCase() !== "sold";
+            const isActive = isActiveItem(item);
+            const isNotSold = !item.status || item.status.toLowerCase() !== "sold";
+
+            return isActive && isNotSold;
         });
 
         const randomConsignment = pickItems(availableConsignments, 1, true)[0];
@@ -198,8 +204,11 @@ async function loadConsignmentPage(jsonFile) {
     if (!container) return;
 
     try {
-        allConsignmentItems = await getJson(jsonFile);
-        console.log(`Loaded ${allConsignmentItems.length} consignment items from ${jsonFile}`);
+        const consignmentData = await getJson(jsonFile);
+
+        allConsignmentItems = consignmentData.filter(isActiveItem);
+
+        console.log(`Loaded ${allConsignmentItems.length} active consignment items from ${jsonFile}`);
 
         renderCategoryButtons(allConsignmentItems, filterContainer, "consignment");
         renderConsignmentCards(allConsignmentItems, "All");

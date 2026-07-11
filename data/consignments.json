@@ -1,6 +1,6 @@
 [
   {
-    "id": "SHS-C001",
+    "id": "!SHS-C001",
     "title": "Example Consignment Item",
     "description": "Replace this with the item description, condition notes, and shipping details.",
     "image": "cons/thumb0.jpg",
@@ -11,7 +11,7 @@
     "buttonText": "Buy Now"
   },
   {
-    "id": "SHS-C002",
+    "id": "!SHS-C002",
     "title": "Another Consigned Item",
     "description": "Use this card for another item once you have photos, price, and payment link.",
     "image": "cons/thumb0.jpg",
@@ -22,7 +22,7 @@
     "buttonText": "Buy Now"
   },
   {
-    "id": "SHS-C003",
+    "id": "!SHS-C003",
     "title": "Sold Example Item",
     "description": "This example shows how a sold item can stay visible but not be purchasable.",
     "image": "cons/thumb0.jpg",
