@@ -359,6 +359,61 @@ h3 {
         border-color: var(--accent);
     }
 
+/* Consignment cards */
+
+.item-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.item-price {
+    color: var(--accent-hover);
+    font-weight: 900;
+    font-size: 1.1rem;
+}
+
+.item-status {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.3rem 0.65rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 900;
+}
+
+.item-id {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+}
+
+.consignment-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 900;
+    background: var(--accent);
+    color: #15100b;
+}
+
+    .consignment-button:hover {
+        background: var(--accent-hover);
+    }
+
+    .consignment-button.sold {
+        pointer-events: none;
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--border);
+    }
+
 /* Sale cards: sales.html */
 
 .sale-list {

@@ -4,6 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     setupYear();
     setupMobileMenu();
 
+    if (document.getElementById("nextSaleCard")) {
+        console.log("Loading next sale hero card...");
+        loadNextSaleCard();
+    }
+
     if (document.getElementById("homeCards")) {
         console.log("Loading homepage cards...");
         loadHomeCards();
@@ -18,9 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Loading eBay cards...");
         loadEbayPage(`data/ebay.json?v=${DATA_VERSION}`);
     }
+
+    if (document.getElementById("consignmentCards")) {
+        console.log("Loading consignment cards...");
+        loadConsignmentPage(`data/consignments.json?v=${DATA_VERSION}`);
+    }
 });
 
 let allEbayItems = [];
+let allConsignmentItems = [];
 
 function setupMobileMenu() {
     const menuButton = document.querySelector("#menuButton");
@@ -58,6 +69,9 @@ function shuffleArray(array) {
 function pickItems(items, limit, random = false) {
     const source = random ? shuffleArray(items) : items;
     return source.slice(0, limit);
+}
+function isActiveItem(item) {
+    return item.id && !item.id.startsWith("!");
 }
 
 async function loadItemCards(jsonFile, containerId, options = {}) {
@@ -113,10 +127,29 @@ async function loadHomeCards() {
         const sales = await getJson(`data/sales.json?v=${DATA_VERSION}`);
         const ebayItems = await getJson(`data/ebay.json?v=${DATA_VERSION}`);
 
-        console.log(`Loaded homepage data: ${sales.length} sales, ${ebayItems.length} eBay items`);
+        let consignmentItems = [];
+
+        try {
+            consignmentItems = await getJson(`data/consignments.json?v=${DATA_VERSION}`);
+        } catch (error) {
+            console.warn("No consignments file found or could not load consignments.json");
+        }
+
+        console.log(
+            `Loaded homepage data: ${sales.length} sales, ${ebayItems.length} eBay items, ${consignmentItems.length} consignment items`
+        );
 
         const firstSale = sales[0];
         const randomEbayItems = pickItems(ebayItems, 2, true);
+
+        const availableConsignments = consignmentItems.filter(item => {
+            const isActive = isActiveItem(item);
+            const isNotSold = !item.status || item.status.toLowerCase() !== "sold";
+
+            return isActive && isNotSold;
+        });
+
+        const randomConsignment = pickItems(availableConsignments, 1, true)[0];
 
         container.innerHTML = "";
 
@@ -132,12 +165,68 @@ async function loadHomeCards() {
             );
         }
 
-        randomEbayItems.forEach(item => {
-            container.appendChild(createItemCard(item));
-        });
+        if (randomConsignment) {
+            const randomEbayItem = pickItems(ebayItems, 1, true)[0];
+
+            if (randomEbayItem) {
+                container.appendChild(createItemCard(randomEbayItem));
+            }
+
+            container.appendChild(createConsignmentCard(randomConsignment));
+        } else {
+            randomEbayItems.forEach(item => {
+                container.appendChild(createItemCard(item));
+            });
+        }
     } catch (error) {
         console.error(error);
         container.innerHTML = `<p class="load-error">Could not load featured items right now.</p>`;
+    }
+}
+
+async function loadNextSaleCard() {
+    const card = document.getElementById("nextSaleCard");
+    if (!card) return;
+
+    try {
+        const sales = await getJson(`data/sales.json?v=${DATA_VERSION}`);
+        const nextSale = sales[0];
+
+        if (!nextSale) {
+            card.innerHTML = `
+                <h2>Next Live Sale</h2>
+                <p class="card-date">Coming soon</p>
+                <p>
+                    We’ll post our next Whatnot show here once it is scheduled.
+                </p>
+                <a href="sales.html">View schedule →</a>
+            `;
+            return;
+        }
+
+        const saleDate = `${nextSale.month || "TBD"} ${nextSale.day || ""}`.trim();
+
+        card.innerHTML = `
+            <h2>${nextSale.title || "Next Live Sale"}</h2>
+            <p class="card-date">${saleDate || "Coming soon"}</p>
+            <p>
+                ${nextSale.description || "Check out our next scheduled Whatnot live sale."}
+            </p>
+            <a href="${nextSale.url || "sales.html"}" target="_blank" rel="noopener noreferrer">
+                ${nextSale.buttonText || "View schedule"} →
+            </a>
+        `;
+    } catch (error) {
+        console.error(error);
+
+        card.innerHTML = `
+            <h2>Next Live Sale</h2>
+            <p class="card-date">Coming soon</p>
+            <p>
+                We’ll post our next Whatnot show here once it is scheduled.
+            </p>
+            <a href="sales.html">View schedule →</a>
+        `;
     }
 }
 
@@ -151,7 +240,7 @@ async function loadEbayPage(jsonFile) {
         allEbayItems = await getJson(jsonFile);
         console.log(`Loaded ${allEbayItems.length} eBay items from ${jsonFile}`);
 
-        renderCategoryButtons(allEbayItems, filterContainer);
+        renderCategoryButtons(allEbayItems, filterContainer, "ebay");
         renderEbayCards(allEbayItems, "All");
     } catch (error) {
         console.error(error);
@@ -159,7 +248,28 @@ async function loadEbayPage(jsonFile) {
     }
 }
 
-function renderCategoryButtons(items, filterContainer) {
+async function loadConsignmentPage(jsonFile) {
+    const container = document.getElementById("consignmentCards");
+    const filterContainer = document.getElementById("consignmentCategoryFilter");
+
+    if (!container) return;
+
+    try {
+        const consignmentData = await getJson(jsonFile);
+
+        allConsignmentItems = consignmentData.filter(isActiveItem);
+
+        console.log(`Loaded ${allConsignmentItems.length} active consignment items from ${jsonFile}`);
+
+        renderCategoryButtons(allConsignmentItems, filterContainer, "consignment");
+        renderConsignmentCards(allConsignmentItems, "All");
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = `<p class="load-error">Could not load consignment items right now.</p>`;
+    }
+}
+
+function renderCategoryButtons(items, filterContainer, pageType) {
     if (!filterContainer) return;
 
     const categories = [
@@ -180,12 +290,19 @@ function renderCategoryButtons(items, filterContainer) {
         }
 
         button.addEventListener("click", () => {
-            document.querySelectorAll(".category-button").forEach(btn => {
+            filterContainer.querySelectorAll(".category-button").forEach(btn => {
                 btn.classList.remove("active");
             });
 
             button.classList.add("active");
-            renderEbayCards(allEbayItems, category);
+
+            if (pageType === "ebay") {
+                renderEbayCards(allEbayItems, category);
+            }
+
+            if (pageType === "consignment") {
+                renderConsignmentCards(allConsignmentItems, category);
+            }
         });
 
         filterContainer.appendChild(button);
@@ -215,6 +332,27 @@ function renderEbayCards(items, category) {
     }
 }
 
+function renderConsignmentCards(items, category) {
+    const container = document.getElementById("consignmentCards");
+    if (!container) return;
+
+    let selectedItems = items;
+
+    if (category !== "All") {
+        selectedItems = items.filter(item => item.category === category);
+    }
+
+    container.innerHTML = "";
+
+    selectedItems.forEach(item => {
+        container.appendChild(createConsignmentCard(item));
+    });
+
+    if (selectedItems.length === 0) {
+        container.innerHTML = `<p class="load-error">No consignment items found in this category yet.</p>`;
+    }
+}
+
 function createItemCard(item) {
     const card = document.createElement("article");
     card.className = "item-card";
@@ -228,6 +366,37 @@ function createItemCard(item) {
 
         <a href="${item.url}" target="_blank" rel="noopener noreferrer">
             ${item.buttonText || "View Item"} →
+        </a>
+    `;
+
+    return card;
+}
+
+function createConsignmentCard(item) {
+    const card = document.createElement("article");
+    card.className = "item-card consignment-card";
+
+    const isSold = item.status && item.status.toLowerCase() === "sold";
+    const buttonClass = isSold ? "consignment-button sold" : "consignment-button";
+    const buttonText = isSold ? "Sold" : (item.buttonText || "Buy Now");
+    const buttonUrl = isSold ? "#" : item.url;
+
+    card.innerHTML = `
+        <img src="${item.image}" alt="${item.title}" class="card-thumbnail">
+
+        <div class="item-meta-row">
+            <span class="item-price">${item.price || ""}</span>
+            <span class="item-status">${item.status || "Available"}</span>
+        </div>
+
+        <h3>${item.title}</h3>
+
+        <p>${item.description}</p>
+
+        <p class="item-id">${item.id || ""}</p>
+
+        <a class="${buttonClass}" href="${buttonUrl}" target="_blank" rel="noopener noreferrer">
+            ${buttonText} →
         </a>
     `;
 

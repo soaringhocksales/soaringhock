@@ -3,19 +3,17 @@
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DSQBXJHCF6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <script>window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-DSQBXJHCF6');
-    </script>
+        gtag('config', 'G-DSQBXJHCF6');</script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>eBay Store | Soaring Hock Sales</title>
-    <meta name="description" content="Featured eBay listings and online inventory from Soaring Hock Sales." />
+    <title>Consignments | Soaring Hock Sales</title>
+    <meta name="description" content="Consigned items available directly through Soaring Hock Sales." />
 
     <link rel="stylesheet" href="styles.css" />
 </head>
@@ -42,40 +40,42 @@
 
     <main>
         <section class="page-hero">
-            <p class="eyebrow">eBay Store</p>
-            <h1>Featured eBay Listings</h1>
+            <p class="eyebrow">Direct Sale Items</p>
+            <h1>Consignments</h1>
             <p>
-                A rotating selection of current listings, collectibles, deals, and hand-picked finds.
+                These are consigned items available directly through Soaring Hock Sales.
+                Each item links to a secure payment page when available.
             </p>
         </section>
 
         <section class="section">
             <div class="section-heading">
-                <p class="eyebrow">Listings</p>
-                <h2>Current eBay Highlights</h2>
+                <p class="eyebrow">Available Items</p>
+                <h2>Current Consignment Highlights</h2>
                 <p>
-                    Choose a category or browse a rotating selection of featured listings.
+                    Browse available consigned items. After purchase, we verify payment and update the listing status.
                 </p>
             </div>
 
-            <div class="category-filter" id="categoryFilter">
-                <!-- Category buttons load from data/ebay.json -->
+            <div class="category-filter" id="consignmentCategoryFilter">
+                <!-- Category buttons load from data/consignments.json -->
             </div>
 
-            <div class="card-grid" id="ebayCards">
-                <!-- eBay cards load from data/ebay.json -->
+            <div class="card-grid" id="consignmentCards">
+                <!-- Consignment cards load from data/consignments.json -->
             </div>
         </section>
 
         <section class="banner">
-            <h2>Check back for fresh finds.</h2>
+            <h2>Interested in consigning something?</h2>
             <p>
-                We update inventory as new items are listed and new deals come through.
+                Reach out to us with details and photos of the item you would like us to review.
             </p>
 
-            <a class="button primary" href="https://www.ebay.com/str/soaringhocksales" target="_blank" rel="noopener noreferrer">
-                Visit eBay Store
-            </a>
+            <div class="button-row centered">
+                <a class="button primary" href="contact.html">Contact Us</a>
+                <a class="button secondary" href="ebay.html">View eBay Store</a>
+            </div>
         </section>
     </main>
 
