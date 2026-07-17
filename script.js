@@ -140,15 +140,15 @@ async function loadHomeCards() {
         );
 
         const firstSale = sales[0];
-        const randomEbayItems = pickItems(ebayItems, 2, true);
 
         const availableConsignments = consignmentItems.filter(item => {
             const isActive = isActiveItem(item);
-            const isNotSold = !item.status || item.status.toLowerCase() !== "sold";
+            const isAvailable = item.status && item.status.toLowerCase() === "available";
 
-            return isActive && isNotSold;
+            return isActive && isAvailable;
         });
 
+        const randomEbayItem = pickItems(ebayItems, 1, true)[0];
         const randomConsignment = pickItems(availableConsignments, 1, true)[0];
 
         container.innerHTML = "";
@@ -166,14 +166,14 @@ async function loadHomeCards() {
         }
 
         if (randomConsignment) {
-            const randomEbayItem = pickItems(ebayItems, 1, true)[0];
-
             if (randomEbayItem) {
                 container.appendChild(createItemCard(randomEbayItem));
             }
 
             container.appendChild(createConsignmentCard(randomConsignment));
         } else {
+            const randomEbayItems = pickItems(ebayItems, 2, true);
+
             randomEbayItems.forEach(item => {
                 container.appendChild(createItemCard(item));
             });
