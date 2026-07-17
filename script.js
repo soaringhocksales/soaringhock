@@ -71,7 +71,9 @@ function pickItems(items, limit, random = false) {
     return source.slice(0, limit);
 }
 function isActiveItem(item) {
-    return item.id && !item.id.startsWith("!");
+    const id = String(item.id || "").trim();
+
+    return id !== "" && !id.startsWith("!");
 }
 
 async function loadItemCards(jsonFile, containerId, options = {}) {
@@ -119,6 +121,8 @@ async function loadSalesCards(jsonFile, containerId, limit = 3) {
     }
 }
 
+
+
 async function loadHomeCards() {
     const container = document.getElementById("homeCards");
     if (!container) return;
@@ -132,24 +136,19 @@ async function loadHomeCards() {
         try {
             consignmentItems = await getJson(`data/consignments.json?v=${DATA_VERSION}`);
         } catch (error) {
-            console.warn("No consignments file found or could not load consignments.json");
+            console.warn("No consignments file found or could not load consignments.json", error);
         }
 
-        console.log(
-            `Loaded homepage data: ${sales.length} sales, ${ebayItems.length} eBay items, ${consignmentItems.length} consignment items`
-        );
+        const activeConsignments = consignmentItems.filter(isActiveItem);
+
+        console.log("Homepage sales:", sales.length);
+        console.log("Homepage eBay items:", ebayItems.length);
+        console.log("Homepage consignment items:", consignmentItems.length);
+        console.log("Homepage active consignments:", activeConsignments);
 
         const firstSale = sales[0];
-
-        const availableConsignments = consignmentItems.filter(item => {
-            const isActive = isActiveItem(item);
-            const isAvailable = item.status && item.status.toLowerCase() === "available";
-
-            return isActive && isAvailable;
-        });
-
         const randomEbayItem = pickItems(ebayItems, 1, true)[0];
-        const randomConsignment = pickItems(availableConsignments, 1, true)[0];
+        const randomConsignment = pickItems(activeConsignments, 1, true)[0];
 
         container.innerHTML = "";
 
@@ -165,24 +164,29 @@ async function loadHomeCards() {
             );
         }
 
-        if (randomConsignment) {
-            if (randomEbayItem) {
-                container.appendChild(createItemCard(randomEbayItem));
-            }
+        if (randomEbayItem) {
+            container.appendChild(createItemCard(randomEbayItem));
+        }
 
+        if (randomConsignment) {
             container.appendChild(createConsignmentCard(randomConsignment));
         } else {
-            const randomEbayItems = pickItems(ebayItems, 2, true);
+            const extraEbayItem = pickItems(
+                ebayItems.filter(item => item !== randomEbayItem),
+                1,
+                true
+            )[0];
 
-            randomEbayItems.forEach(item => {
-                container.appendChild(createItemCard(item));
-            });
+            if (extraEbayItem) {
+                container.appendChild(createItemCard(extraEbayItem));
+            }
         }
     } catch (error) {
         console.error(error);
         container.innerHTML = `<p class="load-error">Could not load featured items right now.</p>`;
     }
 }
+
 
 async function loadNextSaleCard() {
     const card = document.getElementById("nextSaleCard");
@@ -376,10 +380,10 @@ function createConsignmentCard(item) {
     const card = document.createElement("article");
     card.className = "item-card consignment-card";
 
-    const isSold = item.status && item.status.toLowerCase() === "sold";
-    const buttonClass = isSold ? "consignment-button sold" : "consignment-button";
-    const buttonText = isSold ? "Sold" : (item.buttonText || "Buy Now");
-    const buttonUrl = isSold ? "#" : item.url;
+    const hasRealUrl = item.url && item.url !== "#";
+    const buttonClass = hasRealUrl ? "consignment-button" : "consignment-button sold";
+    const buttonText = item.buttonText || "Buy Now";
+    const buttonUrl = hasRealUrl ? item.url : "#";
 
     card.innerHTML = `
         <img src="${item.image}" alt="${item.title}" class="card-thumbnail">
@@ -402,7 +406,6 @@ function createConsignmentCard(item) {
 
     return card;
 }
-
 function createSaleCard(sale) {
     const card = document.createElement("article");
     card.className = "sale-card";
