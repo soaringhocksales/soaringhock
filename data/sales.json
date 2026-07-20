@@ -1,29 +1,1 @@
-[
-  {
-    "title": "Second Whatnot Sale",
-    "description": "Auctioning more Squishmallows and Plushies",
-    "image": "whatnotpics/thumb.webp",
-    "url": "https://www.whatnot.com/dashboard/live/198a89a7-ceb0-49cf-8a18-e7ea0bd62e7b",
-    "buttonText": "Link for Sunday's sale",
-    "month": "SUN 12th",
-    "day": "6pm"
-  },
-  {
-    "title": "Collectors & Plush Auction",
-    "description": "Upcoming Whatnot sale Friday 7PM PT.",
-    "image": "whatnotpics/thumb1.webp",
-    "url": "https://www.whatnot.com/user/soaringhocksales",
-    "buttonText": "View on Whatnot",
-    "month": "SUN 12th",
-    "day": "6pm"
-  },
-  {
-    "title": "Weekend Inventory Drop",
-    "description": "Use this for another scheduled live sale once it is created.",
-    "image": "whatnotpics/thumb.webp",
-    "url": "https://www.whatnot.com/user/soaringhocksales",
-    "buttonText": "Show link coming soon",
-    "month": "SUN 12th",
-    "day": "6pm"
-  }
-]
+[  {    "id": "SHS-C001",    "title": "Third WhatNot Sale!",    "description": "Making Stuff Happen!",    "image": "whatnotpics/thumb1.webp",    "url": "#",    "buttonText": "View Details",    "category": "Collectibles",    "status": "Live"  },  {    "title": "Second Whatnot Sale",    "description": "Auctioning more Squishmallows and Plushies",    "image": "whatnotpics/thumb.webp",    "url": "https://www.whatnot.com/dashboard/live/198a89a7-ceb0-49cf-8a18-e7ea0bd62e7b",    "buttonText": "Link for Sunday\u0027s sale",    "category": "",    "month": "SUN 12th",    "day": "6pm"  },  {    "title": "Collectors \u0026 Plush Auction",    "description": "Upcoming Whatnot sale Friday 7PM PT.",    "image": "whatnotpics/thumb1.webp",    "url": "https://www.whatnot.com/user/soaringhocksales",    "buttonText": "View on Whatnot",    "category": "",    "month": "SUN 12th",    "day": "6pm"  },  {    "title": "Weekend Inventory Drop",    "description": "Use this for another scheduled live sale once it is created.",    "image": "whatnotpics/thumb.webp",    "url": "https://www.whatnot.com/user/soaringhocksales",    "buttonText": "Show link coming soon",    "category": "",    "month": "SUN 12th",    "day": "6pm"  }]
