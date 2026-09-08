@@ -1,16 +1,16 @@
 [
   {
-    "id": "SHS-S001",
-    "title": "Comic Book Sale!",
-    "description": "Comic book extravaganza!",
-    "image": "whatnotpics/thumb2.webp",
-    "url": "https://www.whatnot.com/live/2ed4da19-d2c6-44e2-90b8-cdc4df3ffd7d",
-    "buttonText": "View Details",
-    "category": "Comics",
-    "price": "",
-    "status": "Live",
-    "month": "THU 23th",
-    "day": "8pm"
+    "id": "SHS-C003",
+    "title": "Flea Market! Sat September 12!",
+    "description": "Stop by 219 Troy Rd Moscow, ID. Next to High Beast Vape Shop, right off the highway.",
+    "image": "ebaypics/flyer.webp",
+    "url": "#",
+    "buttonText": "Come by and check it out!",
+    "category": "Toys",
+    "price": "Great Prices on tons of cool stuff!",
+    "status": "Sold",
+    "month": "Fri 12th Sep",
+    "day": "8am-3pm"
   },
   {
     "id": "SHS-S002",
